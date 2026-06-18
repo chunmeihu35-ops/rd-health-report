@@ -1,7 +1,8 @@
-# Multica Agent 配置指南
+# Multica Agent 配置指南（Claude Code 版）
 
 > 产研健康报告 Agent 上线步骤
 > 创建日期：2026-06-18
+> Runtime：Claude Code（Multica 不支持 OpenClaw）
 
 ---
 
@@ -9,8 +10,9 @@
 
 - [ ] Multica 账号已注册（https://multica.fzzixun.com）
 - [ ] 桌面应用已安装（推荐）或 CLI 已安装
-- [ ] OpenClaw 已在本地运行（守护进程）
-- [ ] 飞书项目 MCP 已配置（TOOL.md 中有配置信息）
+- [ ] Claude Code 已安装（`npm install -g @anthropic-ai/claude-code`）
+- [ ] Anthropic API Key 已配置
+- [ ] Node.js 已安装（v18+，用于执行脚本）
 
 ---
 
@@ -25,7 +27,7 @@
 |------|-----|
 | 名称 | `产研健康报告` |
 | 描述 | `自动生成产研健康诊断报告，支持 4 个项目（紫鸟/云资源/LinkFox/BrowserAct）` |
-| Runtime | **OpenClaw**（关键！不要选 Claude Code 或 Cursor） |
+| Runtime | **Claude Code** |
 | 可见性 | `workspace`（工作区可见，团队成员都能用） |
 
 5. 点击「创建」
@@ -34,20 +36,19 @@
 
 ## 步骤 2：导入 Skill
 
-### 方式 A：从本地导入（推荐，首次）
+### 方式 A：从 GitHub 导入（推荐）
+
+1. 在 Multica UI 点击「添加 Skill」→「从 GitHub 导入」
+2. 粘贴仓库 URL：`https://github.com/chunmeihu35-ops/rd-health-report`
+3. 确认导入
+
+### 方式 B：从本机导入
 
 1. 在 Agent 配置页，找到「Skills」板块
 2. 点击「添加 Skill」→「从本机导入」
 3. 守护进程会扫描本地 skill 目录
 4. 选择 `rd-health-report` 目录
 5. 确认导入
-
-### 方式 B：从 GitHub 导入（团队协作）
-
-1. 先把 `skills/rd-health-report/` 推到 GitHub 仓库
-2. 在 Multica UI 点击「添加 Skill」→「从 GitHub 导入」
-3. 粘贴仓库 URL（如 `https://github.com/chunmeihu35-ops/rd-health-report/tree/main/skills/rd-health-report`）
-4. 确认导入
 
 ### 导入后确认
 
@@ -64,14 +65,36 @@
 
 ## 步骤 3：配置 MCP（飞书项目）
 
-1. 在 Agent 配置页，找到「MCP」或「环境变量」板块
-2. 添加 MCP 配置：
+1. 在 Agent 配置页，找到「MCP」板块
+2. 添加 MCP 配置（Claude Code 格式）：
+
+### 方案 A：HTTP MCP Server（推荐）
 
 ```json
 {
   "mcpServers": {
     "feishu-project": {
-      "url": "https://project.feishu.cn/mcp_server/v1?mcpKey=m-b48ed5e3-dd5b-4ab9-b1d2-ab5084db42c0&userKey=7503447689602859011"
+      "type": "http",
+      "url": "https://project.feishu.cn/mcp_server/v1",
+      "headers": {
+        "Authorization": "Bearer m-b48ed5e3-dd5b-4ab9-b1d2-ab5084db42c0",
+        "X-User-Key": "7503447689602859011"
+      }
+    }
+  }
+}
+```
+
+### 方案 B：stdio MCP Server（备选）
+
+如果 HTTP 方式不通，可以用 stdio 方式：
+
+```json
+{
+  "mcpServers": {
+    "feishu-project": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-remote", "https://project.feishu.cn/mcp_server/v1?mcpKey=m-b48ed5e3-dd5b-4ab9-b1d2-ab5084db42c0&userKey=7503447689602859011"]
     }
   }
 }
@@ -81,16 +104,16 @@
 
 ---
 
-## 步骤 4：配置环境变量（如需要）
+## 步骤 4：配置环境变量
 
-如果脚本需要访问 GitHub Gist Token 或其他密钥：
-
-1. 在 Agent 配置页，找到「环境变量」
-2. 添加：
+在 Agent 配置页，找到「环境变量」，添加：
 
 | 变量名 | 值 | 说明 |
 |--------|-----|------|
+| `ANTHROPIC_API_KEY` | `sk-ant-xxx...` | Claude Code 必需 |
 | `GITHUB_GIST_TOKEN` | `ghp_xxx...` | GitHub Pages 发布用 |
+| `FEISHU_MCP_KEY` | `m-b48ed5e3-dd5b-4ab9-b1d2-ab5084db42c0` | 飞书项目 MCP |
+| `FEISHU_USER_KEY` | `7503447689602859011` | 飞书项目用户 |
 
 ---
 
@@ -192,27 +215,33 @@ Todo → In Progress（Agent 自动跑：配置→取数→解析）
 
 ### 月度健康度报告
 
-每月 1 号，Agent 自动运行 `scripts/monthly-health-report.js`，生成上月健康度报告，发给你审核。
+每月 15 号，Agent 自动运行 `scripts/monthly-health-report.js --global`，生成上月全局健康度报告，发给你审核。
 
 ---
 
 ## 常见问题
 
 ### Q1: Agent 没有反应？
-- 检查 OpenClaw 守护进程是否在运行
-- 检查 Agent 的 Runtime 是否选的是 OpenClaw
+- 检查 Claude Code 是否已安装（`claude --version`）
+- 检查 Agent 的 Runtime 是否选的是 Claude Code
 - 检查 Issue 状态是否是 Todo/In Progress（Backlog 不会触发）
+- 检查 Anthropic API Key 是否有效
 
 ### Q2: 取数失败？
-- 检查 MCP 配置是否正确
+- 检查 MCP 配置是否正确（HTTP 或 stdio 方式）
 - 检查飞书项目 API Key 是否过期
 - 在评论里回复：`重跑取数`
 
-### Q3: 我想优化 Skill？
-- 小优化：在飞书里跟我说，我改后同步到 Multica
+### Q3: 脚本执行失败？
+- 检查 Node.js 是否已安装（`node --version`）
+- 检查脚本路径是否正确
+- Claude Code 执行脚本方式：`node scripts/fetch-project-metrics.js cloud-resource`
+
+### Q4: 我想优化 Skill？
+- 小优化：在飞书里跟我说，我改后同步到 GitHub
 - 大优化：创建 Issue「Skill 优化 - XXX」，分配给 Agent
 
-### Q4: 新人怎么用？
+### Q5: 新人怎么用？
 - 看 Issue 描述模板，照着填就行
 - 不需要知道脚本怎么跑、文件在哪
 - Issue 详情页就是仪表盘
@@ -221,24 +250,31 @@ Todo → In Progress（Agent 自动跑：配置→取数→解析）
 
 ## 目录结构（Multica 侧）
 
-Skill 导入后，Agent 工作目录里会有：
+Skill 导入后，Claude Code 会自动加载到 `.claude/skills/` 目录：
 
 ```
-.agent_context/skills/rd-health-report/
-── SKILL-v3-multica.md          ← 主文件（12 状态流程）
+.claude/skills/rd-health-report/
+├── SKILL-v3-multica.md          ← 主文件（12 状态流程）
 ├── references/
 │   ├── project-config.json      ← 4 个项目配置
 │   ├── project-context/         ← 项目历史上下文
 │   ├── html-template.html       ← HTML 模板
-│   ├── baseline-*.json          ← 项目基线
+│   ├── baseline-*.json          ← 项目基线数据
 │   └── execution-log-spec.md    ← 执行日志格式
 ├── scripts/
 │   ├── monthly-health-report.js ← 月度健康度报告
 │   └── build-report-card.js     ← 卡片构建
-└── 全局脚本（仓库根 scripts/）
+└── 全局脚本（需配合仓库根 scripts/）
     ├── fetch-project-metrics.js ← MCP 取数
     ├── parse-project-metrics.js ← 数据解析
     └── report-qa-gate.js        ← QA 门禁
+```
+
+**Claude Code 执行脚本方式**：
+```bash
+node scripts/fetch-project-metrics.js cloud-resource
+node scripts/parse-project-metrics.js cloud-resource
+node scripts/report-qa-gate.js output.html
 ```
 
 ---
