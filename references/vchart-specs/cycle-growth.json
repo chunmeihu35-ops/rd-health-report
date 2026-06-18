@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "name": "交付周期增长率正负柱状图",
+    "description": "环比增长率，正值绿色向上，负值红色向下，顶部/底部label显示百分比",
+    "usage": "替换 data.values 即可复用",
+    "version": "1.0.0"
+  },
+  "spec": {
+    "type": "bar",
+    "data": [
+      {
+        "id": "growthData",
+        "values": [
+          { "month": "2025-10", "growth": 5.9, "color": "positive" },
+          { "month": "2025-11", "growth": 55.6, "color": "positive" },
+          { "month": "2025-12", "growth": -42.9, "color": "negative" },
+          { "month": "2026-01", "growth": 125.0, "color": "positive" },
+          { "month": "2026-02", "growth": -61.1, "color": "negative" },
+          { "month": "2026-03", "growth": 85.7, "color": "positive" }
+        ]
+      }
+    ],
+    "xField": "month",
+    "yField": "growth",
+    "bar": {
+      "style": {
+        "cornerRadius": [4, 4, 4, 4],
+        "fill": {
+          "field": "color",
+          "scale": "colorScale"
+        }
+      }
+    },
+    "scales": [
+      {
+        "id": "colorScale",
+        "type": "ordinal",
+        "domain": ["positive", "negative"],
+        "range": ["#4caf92", "#e86b6b"]
+      }
+    ],
+    "label": {
+      "visible": true,
+      "position": "outside",
+      "style": {
+        "fontSize": 11,
+        "fontWeight": 600
+      },
+      "formatMethod": "(value) => (value > 0 ? '+' : '') + value.toFixed(1) + '%'"
+    },
+    "tooltip": {
+      "trigger": "mark",
+      "mark": {
+        "content": [
+          { "key": "环比变化", "value": "{growth}%" }
+        ]
+      }
+    },
+    "axes": [
+      {
+        "orient": "bottom",
+        "label": { "visible": true, "style": { "fill": "#506c8a", "fontSize": 11 } }
+      },
+      {
+        "orient": "left",
+        "visible": false
+      }
+    ],
+    "crosshair": {
+      "xField": {
+        "visible": true,
+        "line": { "type": "rect", "style": { "fill": "rgba(0,0,0,0.04)" } }
+      }
+    }
+  }
+}

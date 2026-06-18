@@ -1,0 +1,132 @@
+{
+  "project": "BrowserAct",
+  "type": "MVP型项目（探索期）",
+  "dataScope": "需求交付（全部类型）",
+  "baselinePeriod": "2025-11 ~ 2026-04 (6个月滚动窗口)",
+  "currentTeamSize": 9,
+  "baselines": {
+    "monthlyDelivery": {
+      "avg": 7.17,
+      "range": "5-10",
+      "unit": "个/月"
+    },
+    "perCapitaDelivery": {
+      "avg": 0.82,
+      "range": "0.67-1.11",
+      "unit": "个/人/月"
+    },
+    "avgCycle": {
+      "avg": 12.83,
+      "range": "7-18",
+      "unit": "天"
+    },
+    "devCycle": {
+      "avg": 5.17,
+      "range": "1-12",
+      "unit": "天"
+    },
+    "testCycle": {
+      "avg": 7.33,
+      "range": "2-15",
+      "unit": "天"
+    },
+    "waitCycle": {
+      "avg": 0.5,
+      "range": "0-3",
+      "unit": "天"
+    },
+    "defectDensity": {
+      "avg": 32.5,
+      "range": "18-50",
+      "unit": "个/需求"
+    }
+  },
+  "monthlyData": [
+    {
+      "month": "2025-10",
+      "teamSize": 9,
+      "deliveryCount": 3,
+      "avgCycle": 9,
+      "devCycle": 1,
+      "testCycle": 8,
+      "waitCycle": 0,
+      "passRate": "100%",
+      "defectDensity": 15,
+      "perCapitaDelivery": 0.33
+    },
+    {
+      "month": "2025-11",
+      "teamSize": 9,
+      "deliveryCount": 7,
+      "avgCycle": 14,
+      "devCycle": 1,
+      "testCycle": 13,
+      "waitCycle": 0,
+      "passRate": "100%",
+      "defectDensity": 50,
+      "perCapitaDelivery": 0.78
+    },
+    {
+      "month": "2025-12",
+      "teamSize": 9,
+      "deliveryCount": 7,
+      "avgCycle": 8,
+      "devCycle": 1,
+      "testCycle": 7,
+      "waitCycle": 0,
+      "passRate": "100%",
+      "defectDensity": 30,
+      "perCapitaDelivery": 0.78
+    },
+    {
+      "month": "2026-01",
+      "teamSize": 9,
+      "deliveryCount": 10,
+      "avgCycle": 18,
+      "devCycle": 3,
+      "testCycle": 15,
+      "waitCycle": 0,
+      "passRate": "90%",
+      "defectDensity": 29,
+      "perCapitaDelivery": 1.11
+    },
+    {
+      "month": "2026-02",
+      "teamSize": 9,
+      "deliveryCount": 6,
+      "avgCycle": 7,
+      "devCycle": 5,
+      "testCycle": 3,
+      "waitCycle": 0,
+      "passRate": "83.33%",
+      "defectDensity": 18,
+      "perCapitaDelivery": 0.67
+    },
+    {
+      "month": "2026-03",
+      "teamSize": 9,
+      "deliveryCount": 8,
+      "avgCycle": 13,
+      "devCycle": 9,
+      "testCycle": 4,
+      "waitCycle": 0,
+      "passRate": "100%",
+      "defectDensity": 22,
+      "perCapitaDelivery": 0.89
+    },
+    {
+      "month": "2026-04",
+      "teamSize": 7,
+      "deliveryCount": 5,
+      "perCapitaDelivery": 0.71,
+      "avgCycle": 17,
+      "devCycle": 12,
+      "testCycle": 2,
+      "prodCycle": 0,
+      "waitCycle": 3,
+      "passRate": "100.00%",
+      "defectDensity": 46
+    }
+  ],
+  "generatedAt": "2026-05-11"
+}

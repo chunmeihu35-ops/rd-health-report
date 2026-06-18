@@ -1,0 +1,177 @@
+{
+  "project": "紫鸟浏览器",
+  "type": "成熟型项目",
+  "dataScope": "大版本执行需求（不含临时需求）",
+  "baselinePeriod": "2025-12 ~ 2026-05 (6个月滚动窗口)",
+  "currentTeamSize": 52,
+  "baselines": {
+    "monthlyDelivery": {
+      "avg": 11.17,
+      "range": "6-16",
+      "unit": "个/月"
+    },
+    "perCapitaDelivery": {
+      "avg": 0.22,
+      "range": "0.13-0.28",
+      "unit": "个/人/月"
+    },
+    "avgCycle": {
+      "avg": 38.33,
+      "range": "30-43",
+      "unit": "天"
+    },
+    "devCycle": {
+      "avg": 13,
+      "range": "7-23",
+      "unit": "天"
+    },
+    "testCycle": {
+      "avg": 7.33,
+      "range": "4-11",
+      "unit": "天"
+    },
+    "waitCycle": {
+      "avg": 12.17,
+      "range": "7-24",
+      "unit": "天"
+    },
+    "defectDensity": {
+      "avg": 79,
+      "range": "52-107",
+      "unit": "个/需求"
+    }
+  },
+  "monthlyData": [
+    {
+      "month": "2025-08",
+      "teamSize": 46,
+      "deliveryCount": 8,
+      "perCapitaDelivery": 0.17,
+      "avgCycle": 9,
+      "devCycle": 4,
+      "testCycle": 5,
+      "prodCycle": 1,
+      "waitCycle": 1,
+      "passRate": "75.00%",
+      "defectDensity": 9
+    },
+    {
+      "month": "2025-09",
+      "teamSize": 46,
+      "deliveryCount": 17,
+      "perCapitaDelivery": 0.37,
+      "avgCycle": 20,
+      "devCycle": 8,
+      "testCycle": 6,
+      "prodCycle": 2,
+      "waitCycle": 5,
+      "passRate": "100.00%",
+      "defectDensity": 6
+    },
+    {
+      "month": "2025-10",
+      "teamSize": 46,
+      "deliveryCount": 11,
+      "perCapitaDelivery": 0.24,
+      "avgCycle": 27,
+      "devCycle": 12,
+      "testCycle": 7,
+      "prodCycle": 3,
+      "waitCycle": 5,
+      "passRate": "81.82%",
+      "defectDensity": 53
+    },
+    {
+      "month": "2025-11",
+      "teamSize": 46,
+      "deliveryCount": 8,
+      "perCapitaDelivery": 0.17,
+      "avgCycle": 43,
+      "devCycle": 14,
+      "testCycle": 15,
+      "prodCycle": 2,
+      "waitCycle": 12,
+      "passRate": "62.50%",
+      "defectDensity": 47
+    },
+    {
+      "month": "2025-12",
+      "teamSize": 46,
+      "deliveryCount": 10,
+      "perCapitaDelivery": 0.22,
+      "avgCycle": 37,
+      "devCycle": 9,
+      "testCycle": 9,
+      "prodCycle": 10,
+      "waitCycle": 8,
+      "passRate": "100.00%",
+      "defectDensity": 103
+    },
+    {
+      "month": "2026-01",
+      "teamSize": 46,
+      "deliveryCount": 12,
+      "perCapitaDelivery": 0.26,
+      "avgCycle": 43,
+      "devCycle": 17,
+      "testCycle": 11,
+      "prodCycle": 5,
+      "waitCycle": 10,
+      "passRate": "100.00%",
+      "defectDensity": 107
+    },
+    {
+      "month": "2026-02",
+      "teamSize": 46,
+      "deliveryCount": 6,
+      "perCapitaDelivery": 0.13,
+      "avgCycle": 41,
+      "devCycle": 23,
+      "testCycle": 8,
+      "prodCycle": 3,
+      "waitCycle": 7,
+      "passRate": "100.00%",
+      "defectDensity": 81
+    },
+    {
+      "month": "2026-03",
+      "teamSize": 57,
+      "deliveryCount": 16,
+      "perCapitaDelivery": 0.28,
+      "avgCycle": 30,
+      "devCycle": 8,
+      "testCycle": 4,
+      "prodCycle": 4,
+      "waitCycle": 13,
+      "passRate": "100.00%",
+      "defectDensity": 52
+    },
+    {
+      "month": "2026-04",
+      "teamSize": 57,
+      "deliveryCount": 11,
+      "perCapitaDelivery": 0.19,
+      "avgCycle": 39,
+      "devCycle": 14,
+      "testCycle": 8,
+      "prodCycle": 7,
+      "waitCycle": 11,
+      "passRate": "100.00%",
+      "defectDensity": 64
+    },
+    {
+      "month": "2026-05",
+      "teamSize": 52,
+      "deliveryCount": 12,
+      "perCapitaDelivery": 0.23,
+      "avgCycle": 40,
+      "devCycle": 7,
+      "testCycle": 4,
+      "prodCycle": null,
+      "waitCycle": 24,
+      "passRate": "100.00%",
+      "defectDensity": 67
+    }
+  ],
+  "generatedAt": "2026-06-04"
+}

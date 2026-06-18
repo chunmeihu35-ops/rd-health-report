@@ -1,0 +1,126 @@
+{
+  "project": "云资源",
+  "type": "事务型项目",
+  "dataScope": "需求交付（全部类型）",
+  "baselinePeriod": "2025-12 ~ 2026-05 (6个月滚动窗口)",
+  "currentTeamSize": 17,
+  "note": "",
+  "baselines": {
+    "monthlyDelivery": {
+      "avg": 32.5,
+      "range": "14-58",
+      "unit": "个/月"
+    },
+    "perCapitaDelivery": {
+      "avg": 1.91,
+      "range": "0.82-3.41",
+      "unit": "个/人/月"
+    },
+    "avgCycle": {
+      "avg": 15.08,
+      "range": "6.48-24.93",
+      "unit": "天"
+    },
+    "devCycle": {
+      "avg": 6.67,
+      "range": "4-11",
+      "unit": "天"
+    },
+    "testCycle": {
+      "avg": 2.33,
+      "range": "2-3",
+      "unit": "天"
+    },
+    "waitCycle": {
+      "avg": 6.17,
+      "range": "0-12",
+      "unit": "天"
+    },
+    "defectDensity": {
+      "avg": 0.04,
+      "range": "0-0.13",
+      "unit": "个/需求"
+    }
+  },
+  "monthlyData": [
+    {
+      "month": "2025-12",
+      "deliveryCount": 58,
+      "avgCycle": 14.069,
+      "devCycle": 5,
+      "testCycle": 2,
+      "prodCycle": null,
+      "waitCycle": 7,
+      "passRate": 0.9483,
+      "defectDensity": 0.05,
+      "teamSize": 17,
+      "perCapitaDelivery": 3.41
+    },
+    {
+      "month": "2026-01",
+      "deliveryCount": 31,
+      "avgCycle": 16.5161,
+      "devCycle": 7,
+      "testCycle": 3,
+      "prodCycle": null,
+      "waitCycle": 7,
+      "passRate": 0.9677,
+      "defectDensity": 0,
+      "teamSize": 17,
+      "perCapitaDelivery": 1.82
+    },
+    {
+      "month": "2026-02",
+      "deliveryCount": 14,
+      "avgCycle": 24.9286,
+      "devCycle": 11,
+      "testCycle": 2,
+      "prodCycle": null,
+      "waitCycle": 12,
+      "passRate": 1,
+      "defectDensity": 0.07,
+      "teamSize": 17,
+      "perCapitaDelivery": 0.82
+    },
+    {
+      "month": "2026-03",
+      "deliveryCount": 32,
+      "avgCycle": 16.9688,
+      "devCycle": 5,
+      "testCycle": 3,
+      "prodCycle": null,
+      "waitCycle": 9,
+      "passRate": 0.9375,
+      "defectDensity": 0.13,
+      "teamSize": 17,
+      "perCapitaDelivery": 1.88
+    },
+    {
+      "month": "2026-04",
+      "deliveryCount": 27,
+      "avgCycle": 6.4815,
+      "devCycle": 4,
+      "testCycle": 2,
+      "prodCycle": null,
+      "waitCycle": 0,
+      "passRate": 0.963,
+      "defectDensity": 0,
+      "teamSize": 17,
+      "perCapitaDelivery": 1.59
+    },
+    {
+      "month": "2026-05",
+      "deliveryCount": 33,
+      "avgCycle": 11.5152,
+      "devCycle": 8,
+      "testCycle": 2,
+      "prodCycle": null,
+      "waitCycle": 2,
+      "passRate": 0.9697,
+      "defectDensity": 0,
+      "teamSize": 17,
+      "perCapitaDelivery": 1.94
+    }
+  ],
+  "generatedAt": "2026-06-08"
+}

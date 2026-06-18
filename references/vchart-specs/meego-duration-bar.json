@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "name": "Meego操作时长趋势图",
+    "description": "操作平均时长(柱)+操作次数(线)双轴图，含图例切换",
+    "usage": "替换两个 data 的 values 即可复用。series.name 控制图例显示名。",
+    "version": "2.0.0",
+    "changelog": "2026-04-30: 新增legends图例切换、双数据集、name属性、优化样式"
+  },
+  "spec": {
+    "type": "common",
+    "padding": { "left": 10, "right": 10, "top": 40, "bottom": 10 },
+    "data": [
+      {
+        "id": "durData",
+        "values": [
+          { "month": "2025-10", "duration": 2.5 },
+          { "month": "2025-11", "duration": 1.8 },
+          { "month": "2025-12", "duration": 1.6 },
+          { "month": "2026-01", "duration": 1.8 },
+          { "month": "2026-02", "duration": 1.7 },
+          { "month": "2026-03", "duration": 1.7 }
+        ]
+      },
+      {
+        "id": "cntData",
+        "values": [
+          { "month": "2025-10", "count": 217 },
+          { "month": "2025-11", "count": 213 },
+          { "month": "2025-12", "count": 209 },
+          { "month": "2026-01", "count": 230 },
+          { "month": "2026-02", "count": 110 },
+          { "month": "2026-03", "count": 219 }
+        ]
+      }
+    ],
+    "series": [
+      {
+        "type": "bar",
+        "id": "durBar",
+        "name": "平均时长",
+        "dataId": "durData",
+        "xField": "month",
+        "yField": "duration",
+        "bar": {
+          "style": {
+            "cornerRadius": [6, 6, 0, 0],
+            "fill": {
+              "gradient": "linear",
+              "x0": 0.5, "y0": 0,
+              "x1": 0.5, "y1": 1,
+              "stops": [
+                { "offset": 0, "color": "#d79c4a" },
+                { "offset": 1, "color": "#b57c2d" }
+              ]
+            }
+          }
+        },
+        "label": {
+          "visible": true,
+          "position": "top",
+          "style": { "fill": "#7a5a1e", "fontSize": 13, "fontWeight": 700 },
+          "formatMethod": "(v) => v + '天'"
+        }
+      },
+      {
+        "type": "line",
+        "id": "cntLine",
+        "name": "操作次数",
+        "dataId": "cntData",
+        "xField": "month",
+        "yField": "count",
+        "line": { "style": { "stroke": "#506c8a", "lineWidth": 2, "lineDash": [6, 3] } },
+        "point": { "style": { "fill": "#506c8a", "stroke": "#fff", "lineWidth": 2, "size": 7 } },
+        "label": {
+          "visible": true,
+          "position": "top",
+          "offset": 8,
+          "style": { "fill": "#506c8a", "fontSize": 11 },
+          "formatMethod": "(v) => v + '次'"
+        }
+      }
+    ],
+    "axes": [
+      { "orient": "bottom", "type": "band", "label": { "visible": true, "style": { "fill": "#506c8a", "fontSize": 11 } } },
+      { "orient": "left", "type": "linear", "seriesId": ["durBar"], "title": { "visible": true, "text": "平均时长(天)", "style": { "fill": "#7a5a1e" } }, "min": 0 },
+      { "orient": "right", "type": "linear", "seriesId": ["cntLine"], "title": { "visible": true, "text": "操作次数", "style": { "fill": "#506c8a" } }, "grid": { "visible": false }, "min": 0 }
+    ],
+    "tooltip": { "trigger": "axis" },
+    "crosshair": {
+      "xField": { "visible": true, "line": { "type": "rect", "style": { "fill": "rgba(181,124,45,0.08)" } } }
+    },
+    "legends": { "visible": true, "orient": "top", "position": "end" }
+  }
+}

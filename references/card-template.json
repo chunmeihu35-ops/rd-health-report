@@ -1,0 +1,134 @@
+{
+  "_meta": {
+    "name": "产研健康报告飞书卡片模板",
+    "description": "所有项目通用的卡片结构，只替换数据内容",
+    "version": "1.0.0",
+    "created": "2026-04-30",
+    "based_on": "BrowserAct 202603 卡片（用户确认效果OK）",
+    "send_method": "PMO助手应用机器人(cli_a945df3cb43a1bc9) 通过 /open-apis/im/v1/messages 发送，绝不用 webhook 或 SellerAgent2 自己",
+    "mandatory_charts": ["需求交付数量趋势(bar)", "交付周期环比增长率(正负柱状图)"],
+    "updated": "2026-05-08"
+  },
+  "_usage": {
+    "placeholders": {
+      "{{PROJECT_NAME}}": "项目名称，如 云资源、BrowserAct",
+      "{{PROJECT_TYPE}}": "项目类型，如 事务型项目、MVP型（探索期）",
+      "{{TEAM_SIZE}}": "团队人数，如 15、9",
+      "{{PERIOD}}": "分析周期，如 2026年3月",
+      "{{KPI_1_VALUE}}": "月度交付值",
+      "{{KPI_1_TREND}}": "趋势百分比，带▲/▼",
+      "{{KPI_1_TREND_COLOR}}": "green 或 red",
+      "{{KPI_1_PREV}}": "上月值",
+      "{{KPI_2/3/4}}": "同理",
+      "{{SPRING_NOTE}}": "春节基数说明（无则删除该元素）",
+      "{{DELIVERY_CHART_DATA}}": "交付趋势图数据",
+      "{{GROWTH_CHART_DATA}}": "增长率图数据",
+      "{{ISSUE_1/2/3}}": "核心问题摘要文字",
+      "{{IMG_KEY}}": "报告长图 img_key",
+      "{{REPORT_URL}}": "短链接",
+      "{{DATA_SOURCE_URL}}": "度量视图完整URL",
+      "{{DATE}}": "报告日期，如 2026.04.30"
+    }
+  },
+  "card": {
+    "header": {
+      "template": "blue",
+      "title": { "tag": "plain_text", "content": "📊 {{PROJECT_NAME}} · 产研健康诊断报告 · {{PERIOD}}" }
+    },
+    "elements": [
+      {
+        "tag": "markdown",
+        "content": "**项目类型** {{PROJECT_TYPE}} · **团队规模** ~{{TEAM_SIZE}}人 · **分析周期** {{PERIOD}}"
+      },
+      {
+        "tag": "column_set",
+        "flex_mode": "bisect",
+        "background_style": "grey",
+        "columns": [
+          { "tag": "column", "width": "weighted", "weight": 1, "elements": [
+            { "tag": "markdown", "content": "**月度交付** {{KPI_1_VALUE}}\n<font color='{{KPI_1_TREND_COLOR}}'>{{KPI_1_TREND}}</font>\n{{KPI_1_PREV}}" }
+          ]},
+          { "tag": "column", "width": "weighted", "weight": 1, "elements": [
+            { "tag": "markdown", "content": "**人均交付** {{KPI_2_VALUE}}\n<font color='{{KPI_2_TREND_COLOR}}'>{{KPI_2_TREND}}</font>\n{{KPI_2_PREV}}" }
+          ]},
+          { "tag": "column", "width": "weighted", "weight": 1, "elements": [
+            { "tag": "markdown", "content": "**人均时长** {{KPI_3_VALUE}}\n<font color='{{KPI_3_TREND_COLOR}}'>{{KPI_3_TREND}}</font>\n{{KPI_3_PREV}}" }
+          ]},
+          { "tag": "column", "width": "weighted", "weight": 1, "elements": [
+            { "tag": "markdown", "content": "**人均缺陷** {{KPI_4_VALUE}}\n<font color='{{KPI_4_TREND_COLOR}}'>{{KPI_4_TREND}}</font>\n{{KPI_4_PREV}}" }
+          ]}
+        ]
+      },
+      {
+        "_comment": "春节基数说明（仅1-3月需要，其他月份删除此元素）",
+        "tag": "markdown",
+        "content": "⚠️ {{SPRING_NOTE}}"
+      },
+      {
+        "tag": "markdown",
+        "content": "📊 **需求交付数量趋势**（近6月）"
+      },
+      {
+        "tag": "chart",
+        "aspect_ratio": "16:9",
+        "color_theme": "brand",
+        "chart_spec": {
+          "type": "bar",
+          "data": [{ "id": "barData", "values": "{{DELIVERY_CHART_DATA}}" }],
+          "xField": "month",
+          "yField": "value",
+          "seriesField": "type",
+          "color": ["#8bb8d9", "#2d7eb5"],
+          "label": { "visible": true, "position": "outside", "style": { "fontSize": 12 } },
+          "axes": [{ "orient": "left", "softMax": "{{DELIVERY_SOFT_MAX}}" }],
+          "legends": { "visible": false }
+        }
+      },
+      {
+        "tag": "markdown",
+        "content": "📈 **交付周期环比增长率**（近6月）"
+      },
+      {
+        "tag": "chart",
+        "aspect_ratio": "16:9",
+        "color_theme": "brand",
+        "chart_spec": {
+          "type": "bar",
+          "data": [{ "id": "barData", "values": "{{GROWTH_CHART_DATA}}" }],
+          "xField": "month",
+          "yField": "value",
+          "seriesField": "type",
+          "color": ["#4caf92", "#e86b6b"],
+          "label": { "visible": true, "position": "outside", "style": { "fontSize": 12 } },
+          "axes": [{ "orient": "left", "softMin": "{{GROWTH_SOFT_MIN}}", "softMax": "{{GROWTH_SOFT_MAX}}" }],
+          "legends": { "visible": false }
+        }
+      },
+      { "tag": "hr" },
+      {
+        "tag": "markdown",
+        "content": "🔍 **核心问题定位**\n\n🟢 **发现一**：{{ISSUE_1}}\n🔴 **发现二**：{{ISSUE_2}}\n🟠 **发现三**：{{ISSUE_3}}"
+      },
+      { "tag": "hr" },
+      {
+        "tag": "img",
+        "img_key": "{{IMG_KEY}}",
+        "alt": { "tag": "plain_text", "content": "{{PROJECT_NAME}} {{PERIOD}} 产研健康诊断报告完整长图" }
+      },
+      { "tag": "hr" },
+      {
+        "tag": "markdown",
+        "content": "📎 **完整报告**：[查看详情]({{REPORT_URL}})\n📊 **数据来源**：[飞书项目度量视图]({{DATA_SOURCE_URL}})\n\nPMO 出品 · {{DATE}} · Claude Opus 4.6"
+      }
+    ]
+  },
+  "_style_rules": {
+    "header": "蓝色主题（template: blue）",
+    "核心发现文案": "卡片核心发现的用词、emoji、编号方式必须与报告HTML保持一致。报告用‘发现’卡片就用‘发现’，报告用🟢/🔴/🟠卡片就用🟢/🔴/🟠，禁止卡片自创表述",
+    "KPI趋势色": "统一规则：正值/上升▲=green，负值/下降▼=red。不管好事坏事，纯机械按涨跌定色",
+    "图表颜色": "历史月=#8bb8d9，当月=#2d7eb5，正增长=#4caf92，负增长=#e86b6b。⚠️ VChart color数组按seriesField首次出现顺序映射：如果数据第一条是负增长，则color必须写['#e86b6b','#4caf92']（红在前）",
+    "图表标签": "position: outside（正值在柱顶，负值在柱底）",
+    "底部格式": "markdown标签，📎📊emoji + 加粗标题 + 链接，最后一行PMO出品信息",
+    "禁止": "不用note标签做底部、不用action按钮、不用config.wide_screen_mode"
+  }
+}
